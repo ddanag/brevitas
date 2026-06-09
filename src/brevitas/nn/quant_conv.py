@@ -303,7 +303,6 @@ class QuantConv3d(QuantWBIOL, Conv3d):
         return self.groups == self.in_channels
 
     def conv3d_zeros_pad(self, x: Tensor, weight: Tensor, bias: Optional[Tensor]):
-        #import pdb; pdb.set_trace()
         out = conv3d(x, weight, bias, self.stride, self.padding, self.dilation, self.groups)
         return out
 
@@ -326,6 +325,7 @@ class QuantConv3d(QuantWBIOL, Conv3d):
 
     def inner_forward_impl(self, x: Tensor, quant_weight: Tensor, quant_bias: Optional[Tensor]):
         if self.padding_type == 'standard':
+            #import pdb; pdb.set_trace()
             return self.conv3d_zeros_pad(x, quant_weight, quant_bias)
         elif self.padding_type == 'same':
             return self.conv3d_same_zeros_pad(x, quant_weight, quant_bias)
